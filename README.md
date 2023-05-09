@@ -1,7 +1,7 @@
-# ifrit
+# IFRIT
 Incident Forensic Response In Terminal script for linux
 
-IFRIT. Incident Forensic Response In Terminal =)
+# IFRIT. Incident Forensic Response In Terminal =)
 Скрипт для сбора различной информации на linux, которая может быть полезна при расследовании инцидентов информационной безопасности, триаже и анализе хостов.
 Тестировался на Debian-like дистрибутивах типа Kali, Astra. Могут встречаться баги, в системе мы ничего не меняем (предполагаем работу с флешки), формируем папку с результатми выполнения команд (об этом ниже).
 
