@@ -22,7 +22,7 @@ Incident Forensic Response In Terminal script for linux
 
 Запуск (предпочтительно от рута\sudo):
 ```
-	chmod a+x ./ifrit.sh && ./ifrit.sh
+chmod a+x ./ifrit.sh && ./ifrit.sh
 ```
 
 На выхлопе рядом со скриптом получаем архив вида 
