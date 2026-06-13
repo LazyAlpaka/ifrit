@@ -62,6 +62,7 @@ chmod a+x ./ifrit.sh && ./ifrit.sh
 	 services_info - инфа по службам
 	 susp_chk - проверка на некоторые очень подозрительные техники атакующих в системе
 	 systemd_timers_gens - конфигурации таймеров и генераторов systemd
+	 systemd_tree - результат построения дерева зависимостей systemctl
 	 systemd_units - конфигурация всех служб 
 	 usb_list_file - история подключения USB-носителей
 	 users_cfgs - текстовка конфигураций профилей пользователей
