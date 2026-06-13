@@ -1,13 +1,14 @@
 # IFRIT
 Incident Forensic Response In Terminal script for linux
 
-## Обновлено 09.06.2026
+## Обновлено 13.06.2026
 
 Проведён долгожданный рефакторинг (слава LLM).\
 Добавлены глобальные флаги в начало скрипта.\
 Улучшена работа, стабильность.\
 Добавлены новые проверки, включая аналитику docker, типовых мест для закрепления (+systemd timers/generators).\
 Добавлен сбор логов из `/var/run/log`.\
+Добавлено несколько интересных команд `systemctl*` семейства.
 
 # IFRIT. Incident Forensic Response In Terminal =)
 Статья: https://xakep.ru/2023/05/03/linux-incident-response/
