@@ -1,6 +1,6 @@
 #!/bin/bash
 # IFRIT. Stands for: Incident Forensic Response In Terminal =)
-# Official release 4.0 (09.06.2026)
+# Official release 4.1 (13.06.2026)
 # https://xakep.ru/2023/05/03/linux-incident-response/
 # provided by Alex und Boris
 # https://github.com/LazyAlpaka/ifrit
@@ -32,7 +32,7 @@ echo -e "${red} _| |_| |   | |\ \ _| |_  | |  ${clear}"
 echo -e "${red} \___/\_|   \_| \_|\___/  \_/  ${clear}"
 echo
 echo -e "${yellow}Incident Forensic Response In Terminal ${clear}"
-echo -e "${yellow}build 09.06.2026 ${clear}"
+echo -e "${yellow}build 14.06.2026 ${clear}"
 
 
 # Глобальные флаги для работы. При их установке необходимо заполнить связанные поисковые массивы ниже
@@ -1038,6 +1038,8 @@ snapshot services_info "Сценарии init.d" ls -lta /etc/init.d
 } >> services_info 
 
 {
+snapshot services_configs "systemctl loading" systemd-analyze
+snapshot services_configs "systemctl critical unit chain" systemd-analyze critical-chain
 snapshot services_configs "systemctl unit-paths system" systemd-analyze unit-paths
 snapshot services_configs "systemctl unit-paths user" systemd-analyze unit-paths --user
 snapshot services_configs "systemd-analyze blame" systemd-analyze blame --no-pager
@@ -1490,9 +1492,10 @@ snapshot junk_info "GnuPG contains" bash -c 'ls -ltaR /home/*/.gnupg/* 2>/dev/nu
 #history­time­empty­*.dat — when unplugged, log of time (in seconds) until empty
 # history­time­full­*.dat — when charging, log of time (in seconds) until full
 snapshot junk_info "Battery logs" bash -c 'more /var/lib/upower/* 2>/dev/null | cat'
+snapshot junk_info "ac connected check" systemd-ac-power -v
+snapshot junk_info "battery reduce check" systemd-ac-power -v --l
 snapshot junk_info "UUID of partitions: blkid" blkid
 snapshot junk_info "Volumes: vol*" bash -c 'more /media/data/vol* 2>/dev/null | cat'
-
 } >> junk_info
 
 {
@@ -1705,6 +1708,11 @@ snapshot persistence_check "incron spool" bash -c 'more /var/spool/incron/* 2>/d
         fi
 
 } >> systemd_units
+
+echo -e "${yellow}[Постероение деерва зависимостей systemctl]${clear}" 
+{
+snapshot systemd_timers_gens "systemctl full dependency tree"  systemctl list-dependencies  --all --no-pager
+} >> systemd_tree
 
 echo -e "${yellow}[Сбор конфигураций systemd timers/generators для закрепления...]${clear}" 
 {
@@ -2011,6 +2019,7 @@ fi
 	# services_info - инфа по службам
 	# susp_chk - проверка на некоторые очень подозрительные техники атакующих в системе
 	# systemd_timers_gens - конфигурации таймеров и генераторов systemd
+	# systemd_tree - результат построения дерева зависимостей systemctl
 	# systemd_units - конфигурация всех служб 
 	# usb_list_file - история подключения USB-носителей
 	# users_cfgs - текстовка конфигураций профилей пользователей
