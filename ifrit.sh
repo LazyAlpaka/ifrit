@@ -1709,7 +1709,7 @@ snapshot persistence_check "incron spool" bash -c 'more /var/spool/incron/* 2>/d
 
 } >> systemd_units
 
-echo -e "${yellow}[Постероение деерва зависимостей systemctl]${clear}" 
+echo -e "${yellow}[Построение дерева зависимостей systemctl]${clear}" 
 {
 snapshot systemd_timers_gens "systemctl full dependency tree"  systemctl list-dependencies  --all --no-pager
 } >> systemd_tree
@@ -1968,7 +1968,7 @@ chmod -R ugo+rwx "./$saveto.tar.gz"
  
  end=`date +%s`
  echo -e "\n" 
- echo "ENDED! Execution time was $(expr $end - $start) seconds."
+ echo "ENDED at $(end) ($(date '+%Y-%m-%d %H:%M:%S'))! Execution time was $(expr $end - $start) seconds."
  #echo -e "${magenta}Проверяй директорию ${saveto}! ${clear}"
  echo -e "${magenta}Забирай файл $saveto.tar.gz! ${clear}"
  echo -e "${red}Не забудь удалить меня, ifrit.sh !! ${clear}"
